@@ -1,0 +1,602 @@
+/* ----------------------------------------------------
+   Edo Reveries · Hybrid Modern + Traditional Theme
+   Bootstrap-friendly · Wide spacing · Text-only cards
+---------------------------------------------------- */
+
+/* -------------------- ROOT -------------------- */
+:root {
+  --bg-body: #F6F0E6;
+  --bg-card: #FFFFFF;
+  --ink: #2D2925;
+  --muted: #6E6253;
+
+  --accent: #C0473D;                 /* vermilion */
+  --accent-soft: rgba(192,71,61,0.12);
+
+  --border-soft: #D5C7B3;
+  --shadow-soft: 0 14px 30px rgba(0,0,0,0.12);
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+
+  --anim-fast: .25s;
+  --anim-medium: .5s;
+
+  --edo-paper: #FFFBF4;
+  --edo-text-main: var(--ink);
+  --edo-text-muted: var(--muted);
+}
+
+/* -------------------- GLOBAL -------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(255, 230, 230, .45) 0, transparent 60%),
+    radial-gradient(circle at 80% 0, rgba(255, 240, 230, .35) 0, transparent 60%),
+    var(--bg-body);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* utility */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* -------------------- ANIMATIONS -------------------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp var(--anim-medium) ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------- HERO -------------------- */
+.hero {
+  padding: 3rem 0 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(255,182,193,0.28) 0, transparent 55%),
+    radial-gradient(circle at 90% 0%, rgba(255,228,225,0.30) 0, transparent 60%);
+  opacity: .8;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: "Shippori Mincho", "Times New Roman", serif;
+  font-size: clamp(2.4rem, 4vw, 3.1rem);
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .8rem;
+  color: var(--accent);
+}
+
+.hero-text {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.members {
+  font-size: .95rem;
+  color: var(--muted);
+  margin-top: .5rem;
+}
+
+.members span {
+  color: var(--accent);
+}
+
+/* -------------------- TOP NAV -------------------- */
+.top-nav {
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.nav-left-label {
+  letter-spacing: .16em;
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+.nav-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* -------------------- FILTERS -------------------- */
+.filters {
+  margin-top: 2rem;
+  margin-bottom: .75rem;
+}
+
+.filter-buttons {
+  display: inline-flex;
+  gap: .25rem;
+  padding: .3rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+
+.filter-btn {
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  padding: .4rem 1.1rem;
+  font-size: .9rem;
+  cursor: pointer;
+  color: var(--muted);
+  transition: background var(--anim-fast), color var(--anim-fast), transform var(--anim-fast);
+}
+
+.filter-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* -------------------- SECTION TITLE -------------------- */
+.section-title {
+  font-family: "Shippori Mincho", "Times New Roman", serif;
+  font-size: 1.5rem;
+  margin-bottom: .3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.section-title::before {
+  content: "〰";
+  font-size: 1.2rem;
+  transform: translateY(-2px);
+}
+
+.section-subtext {
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+/* -------------------- GALLERY ROW -------------------- */
+.gallery-row {
+  margin-top: 1.5rem;
+  margin-bottom: 2.8rem;
+}
+
+/* -------------------- ART CARDS (Card A style) -------------------- */
+.art-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+/* subtle vertical strip on the left */
+.art-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 5px;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(to bottom, #E1D3C1, #C6B59F);
+  opacity: .9;
+}
+
+.art-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 34px rgba(0,0,0,0.18);
+}
+
+/* header area */
+.art-card-header {
+  padding-left: .3rem; /* avoid overlapping the strip */
+}
+
+/* type pill */
+.art-type-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: .28rem .7rem;
+  border-radius: 999px;
+  background: #EFE1D0;
+  color: #5C4B3B;
+  margin-bottom: .35rem;
+}
+
+.art-type-pill[data-type="painting"] {
+  background: rgba(29, 53, 87, 0.12);
+}
+
+.art-type-pill[data-type="sculpture"] {
+  background: rgba(216, 162, 74, 0.16);
+}
+
+.art-type-pill[data-type="architecture"] {
+  background: rgba(192, 71, 61, 0.14);
+}
+
+.art-title {
+  font-family: "Shippori Mincho", "Times New Roman", serif;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.art-meta {
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+.art-member {
+  font-size: .9rem;
+  color: #8C7A64;
+  margin-top: .2rem;
+}
+
+/* snippet + link */
+.card-snippet {
+  margin: .4rem 0 .25rem;
+  font-size: .95rem;
+}
+
+.text-link {
+  font-size: .92rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* -------------------- DETAIL PAGE -------------------- */
+body.detail-page {
+  font-size: 19px;
+}
+
+.detail-hero {
+  padding-bottom: 2rem;
+}
+
+.detail-page .hero h1 {
+  font-size: clamp(2.5rem, 4.3vw, 3.2rem);
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.8rem;
+  font-size: .95rem;
+  color: var(--muted);
+  margin-top: .6rem;
+}
+
+.detail-card {
+  margin-top: 2.2rem;
+}
+
+.artwork-body {
+  max-width: 70ch;
+}
+
+.artwork-body h2 {
+  font-family: "Shippori Mincho", "Times New Roman", serif;
+  font-size: 1.4rem;
+  margin-bottom: .35rem;
+}
+
+.artwork-body p {
+  font-size: 1.03rem;
+  line-height: 1.8;
+}
+
+/* artwork image */
+.artwork-figure {
+  margin: 1.8rem auto 0;
+  max-width: 720px;
+  text-align: center;
+}
+
+.artwork-figure img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.15);
+}
+
+/* -------------------- SUBMIT PAGE -------------------- */
+form label {
+  font-size: .9rem;
+  color: #7B6A58;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="file"],
+select,
+textarea {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border-soft) !important;
+  font-size: .95rem;
+  padding: .6rem .8rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(192,71,61,0.18) !important;
+  outline: none;
+}
+
+/* main CTA buttons */
+.primary-btn,
+button.primary-btn {
+  background: linear-gradient(135deg, #D8A24A, #C88737);
+  border: none;
+  color: #3D250A;
+  padding: .65rem 1.5rem;
+  border-radius: 999px;
+  font-size: .98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--anim-fast), box-shadow var(--anim-fast), filter var(--anim-fast);
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.15);
+}
+
+.form-status {
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+/* ------------------------------
+   Submission portal cards & forms
+   (submit.html)
+   ------------------------------ */
+
+.card {
+  max-width: 960px;
+  margin: 1.75rem auto 2.4rem;
+  padding: 1.75rem 1.9rem 2rem;
+  border-radius: 18px;
+  background: var(--edo-paper);
+  border: 1px solid rgba(145, 100, 61, 0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* header row inside each card */
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1.1rem;
+}
+
+.section-header h2 {
+  font-family: "Shippori Mincho", "Times New Roman", serif;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.section-subtext {
+  font-size: 0.9rem;
+  color: var(--edo-text-muted);
+  margin: 0.25rem 0 0;
+}
+
+/* pill labels (Members only / Admin tools) */
+.badge {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(192, 71, 61, 0.10);
+  color: #b04432;
+  border: 1px solid rgba(192, 71, 61, 0.30);
+}
+
+/* grid for top row of fields */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem 1.35rem;
+  margin-bottom: 0.8rem;
+}
+
+.form-group {
+  margin-bottom: 0.95rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.86rem;
+  color: #7c6551;
+}
+
+/* inputs / selects / textareas */
+input[type="text"],
+input[type="password"],
+select,
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid rgba(145, 100, 61, 0.28);
+  background: #ffffff;
+  font: 0.92rem/1.45 "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--edo-text-main);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(145, 100, 61, 0.6);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #c0473d;
+  box-shadow: 0 0 0 2px rgba(192, 71, 61, 0.16);
+  background-color: #fffcf7;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* bottom row in cards: button + status text */
+.form-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1.5rem;
+  margin-top: 0.4rem;
+}
+
+.form-status {
+  font-size: 0.86rem;
+  color: var(--edo-text-muted);
+}
+
+/* primary golden button */
+.primary-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(135deg, #e2b15a, #c78734);
+  color: #3c2408;
+  box-shadow: 0 10px 20px rgba(208, 158, 76, 0.38);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.primary-btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 5px 14px rgba(208, 158, 76, 0.45);
+}
+
+/* phone tweaks */
+@media (max-width: 720px) {
+  .card {
+    margin: 1.25rem auto 2rem;
+    padding: 1.35rem 1.1rem 1.5rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* hidden utility */
+.hidden {
+  display: none !important;
+}
+
+/* -------------------- FOOTER -------------------- */
+.site-footer {
+  margin-top: 3rem;
+  padding: 0.9rem 0 1.1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+
+  /* subtle “paper edge” instead of big gradient */
+  background: rgba(255, 255, 255, 0.85);
+  border-top: 1px solid rgba(213, 199, 179, 0.8);
+  box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.04);
+
+  backdrop-filter: blur(6px);        /* soft glassy feel */
+}
+
+/* optional: tighten the paragraph inside */
+.site-footer p {
+  margin: 0;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+
+/* -------------------- RESPONSIVE -------------------- */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 2.4rem;
+    padding-bottom: 2rem;
+  }
+}
+

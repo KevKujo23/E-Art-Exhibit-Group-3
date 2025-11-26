@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Member Submission – Edo Reveries</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ======================== HEADER ======================== -->
+  <header class="hero">
+    <div class="container">
+      <div class="top-nav">
+        <a href="index.html" class="nav-link">← Back to exhibition</a>
+      </div>
+
+      <p class="eyebrow">Member Area</p>
+      <h1>Artwork Submission Portal</h1>
+
+      <p class="hero-text">
+        This page is reserved for group members to submit their chosen Edo-period artworks
+        and D.I.E. write-ups. Please keep your access code private.
+      </p>
+    </div>
+  </header>
+
+  <!-- ======================== MAIN ======================== -->
+  <main>
+    <div class="container">
+
+      <!-- ================== ACCESS GATE ================== -->
+      <section id="gate-card" class="card">
+        <div class="section-header">
+          <div>
+            <h2>Enter access code</h2>
+            <p class="section-subtext">
+              Only members with the shared token can open the submission form.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="accessCode">Access code</label>
+          <input type="password" id="accessCode" placeholder="Enter shared code">
+        </div>
+
+        <div class="form-footer">
+          <button id="unlockBtn" class="primary-btn">Unlock form</button>
+          <p id="gate-status" class="form-status"></p>
+        </div>
+      </section>
+
+      <!-- ================== SUBMISSION FORM ================== -->
+      <section id="submit-section" class="card hidden">
+        <div class="section-header">
+          <div>
+            <h2>Submit Your Artwork Entry</h2>
+            <p class="section-subtext">
+              Fill out the form with your chosen Edo-period artwork and your D.I.E. write-up.
+              Once submitted, the artwork will appear in the exhibition.
+            </p>
+          </div>
+          <p class="badge">Members only</p>
+        </div>
+
+        <form id="artwork-form" novalidate>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label for="memberName">Your name</label>
+              <input type="text" id="memberName" name="memberName" 
+                     required placeholder="e.g. Kevin Lapuz">
+            </div>
+
+            <div class="form-group">
+              <label for="title">Artwork title</label>
+              <input type="text" id="title" name="title" 
+                     required placeholder="e.g. The Great Wave off Kanagawa">
+            </div>
+
+            <div class="form-group">
+              <label for="artist">Artist</label>
+              <input type="text" id="artist" name="artist" 
+                     required placeholder="e.g. Katsushika Hokusai">
+            </div>
+
+            <div class="form-group">
+              <label for="year">Year</label>
+              <input type="text" id="year" name="year" 
+                     required placeholder="e.g. 1831">
+            </div>
+
+            <div class="form-group">
+              <label for="type">Artwork type</label>
+              <select id="type" name="type" required>
+                <option value="">Select type</option>
+                <option value="painting">Painting</option>
+                <option value="sculpture">Sculpture</option>
+                <option value="architecture">Architecture</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Image upload -->
+          <div class="form-group">
+            <label for="imageFile">Artwork image</label>
+            <input type="file" id="imageFile" accept="image/*">
+            <p class="section-subtext" style="font-size: 0.8rem; margin-top: 0.25rem;">
+              For new submissions, upload an image.  
+              When editing, leave this empty to keep the current image.
+            </p>
+          </div>
+
+          <!-- D.I.E. -->
+          <div class="form-group">
+            <label for="describe">Describe (5–8 sentences)</label>
+            <textarea id="describe" name="describe" rows="3" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="interpret">Interpret (5–8 sentences)</label>
+            <textarea id="interpret" name="interpret" rows="3" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="evaluate">Evaluate (5–8 sentences)</label>
+            <textarea id="evaluate" name="evaluate" rows="3" required></textarea>
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" class="primary-btn" id="submit-btn">Submit artwork</button>
+            <p id="form-status" class="form-status"></p>
+          </div>
+
+        </form>
+      </section>
+
+      <!-- ================== MANAGE ENTRIES ================== -->
+      <section id="manage-section" class="card hidden" style="margin-top: 2rem;">
+        <div class="section-header">
+          <div>
+            <h2>Manage Submitted Artworks</h2>
+            <p class="section-subtext">
+              Edit or delete incorrect entries. Changes apply immediately.
+            </p>
+          </div>
+          <p class="badge">Admin tools</p>
+        </div>
+
+        <div id="artwork-list">
+          <p class="section-subtext">Waiting for unlock…</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Edo Reveries · Member Submission Portal</p>
+    </div>
+  </footer>
+
+  <!-- ======================== SCRIPTS ======================== -->
+  <!-- Supabase for image upload -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <!-- Page logic -->
+  <script src="submit.js"></script>
+
+</body>
+</html>

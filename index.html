@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edo Reveries – E-Art Exhibition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- HERO / HEADER -->
+  <header class="hero hero-index">
+    <div class="container hero-inner">
+
+      <div class="top-nav d-flex justify-content-between align-items-center mb-3">
+        <span class="nav-left-label text-uppercase">
+          Fine Arts: Visual Arts · Finals project
+        </span>
+        <a href="submit.html" class="nav-link">Member submission</a>
+      </div>
+
+      <p class="eyebrow fade-in">E-Art Exhibition · Finals Project</p>
+      <h1 class="fade-in" style="animation-delay: 0.05s;">
+        Edo Reveries: Visions of Japan’s Floating World
+      </h1>
+
+      <p class="hero-text fade-in" style="animation-delay: 0.1s;">
+        This digital exhibition explores the beauty, order, and quiet drama of Edo-period Japan.
+        Through paintings, sculptures, and architectural works, we highlight how everyday life,
+        spirituality, and nature were transformed into enduring visual forms.
+      </p>
+
+      <p class="members fade-in" style="animation-delay: 0.15s;">
+        Curated by:
+        <span>Iñigo Raphael Duremdes</span>, <span>Matthew Mackenzie Escalante </span>, <span>Juan Carlos Miguel Esguerra</span>,
+        <span>Mark Nielsen Ferreras</span>, <span>Sean Benedict Ibuyan</span>, <span>Jeongwoo Kim</span>,
+        <span>Kevin Lawrenze Lapuz</span>, <span>Lewis Cayson Recato Dy</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="py-4">
+    <div class="container">
+
+      <!-- Filters -->
+      <section class="filters fade-in" style="animation-delay: 0.2s;">
+        <h2 class="visually-hidden">Filter artworks</h2>
+        <div class="filter-buttons">
+          <button data-filter="all" class="filter-btn active">All</button>
+          <button data-filter="painting" class="filter-btn">Paintings</button>
+          <button data-filter="sculpture" class="filter-btn">Sculptures</button>
+          <button data-filter="architecture" class="filter-btn">Architecture</button>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section id="gallery-section" class="mt-4">
+        <h2 class="section-title fade-in" style="animation-delay: 0.25s;">
+          Exhibition Gallery
+        </h2>
+        <p class="section-subtext fade-in" style="animation-delay: 0.3s;">
+          A curated glimpse into Edo-period Japan. Click an artwork to read the full D.I.E. write-up.
+        </p>
+
+        <!-- Cards get injected here -->
+        <div id="gallery" class="row g-4 gallery-row">
+          <!-- JS will render artworks as col-12 col-md-6 + .art-card -->
+        </div>
+
+        <!-- Loading / empty states -->
+        <p id="gallery-status" class="section-subtext mt-3"></p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p class="mb-0">
+        Edo Reveries · E-Art Exhibition · Finals Project
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Firebase (already used in your project) -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <!-- Index logic -->
+  <script src="index-load.js"></script>
+  <script src="index-filter.js"></script>
+</body>
+</html>
