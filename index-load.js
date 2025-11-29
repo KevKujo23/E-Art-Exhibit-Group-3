@@ -42,9 +42,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             ${capitalize(typeLabel)}
           </div>
 
-          <div>
-            <div class="" "">
-            <h1> large fish </h1>
+          <div class="art-card-header">
+          <div class="art-type-pill" data-type="${typeLabel}">
+            ${capitalize(typeLabel)}
           </div>
 
           <h3 class="art-title">${escapeHtml(art.title || "Untitled work")}</h3>
