@@ -5,15 +5,15 @@
 
 /* -------------------- ROOT -------------------- */
 :root {
-  --bg-body: #F6F0E6;
+  --bg-body: #EFE2D1;
   --bg-card: #FFFFFF;
-  --ink: #2D2925;
-  --muted: #6E6253;
+  --ink: #1E1A16; 
+  --muted: #5A4D3F;
 
-  --accent: #C0473D;                 /* vermilion */
-  --accent-soft: rgba(192,71,61,0.12);
+  --accent: #C0372C;                 /* vermilion */
+  --accent-soft: rgba(192,55,44,0.16);
 
-  --border-soft: #D5C7B3;
+  --border-soft: #C8B7A2;
   --shadow-soft: 0 14px 30px rgba(0,0,0,0.12);
 
   --radius-lg: 20px;
@@ -59,15 +59,15 @@ body {
 /* -------------------- ANIMATIONS -------------------- */
 .fade-in {
   opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp var(--anim-medium) ease forwards;
+  transform: translateY(16px);
+  transition:
+    opacity var(--anim-medium) ease,
+    transform var(--anim-medium) ease;
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.fade-in.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* -------------------- HERO -------------------- */
@@ -211,13 +211,33 @@ body {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-soft);
-  padding: 1.4rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: .6rem;
+  padding: 1.3rem 1.4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 160px) minmax(0, 1fr);
+  gap: 1.1rem;
   position: relative;
   overflow: hidden;
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  cursor: pointer;
+}
+
+.art-card-image {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f3e7d8;
+  align-self: stretch;
+}
+
+.art-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform .3s ease;
+}
+
+.art-card:hover .art-card-image img {
+  transform: scale(1.06);
 }
 
 /* subtle vertical strip on the left */
@@ -236,6 +256,14 @@ body {
 .art-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 18px 34px rgba(0,0,0,0.18);
+  border-color: #b79f84; /* slightly darker border for contrast */
+}
+
+.art-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.55rem;
 }
 
 /* header area */
@@ -594,9 +622,13 @@ textarea {
 
 /* -------------------- RESPONSIVE -------------------- */
 @media (max-width: 768px) {
-  .hero {
-    padding-top: 2.4rem;
-    padding-bottom: 2rem;
+  .art-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .art-card-image {
+    max-height: 220px;
   }
 }
+
 

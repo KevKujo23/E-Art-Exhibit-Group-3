@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const id = doc.id;
 
       const col = document.createElement("div");
-      col.className = "col-12 col-md-6";
+      col.className = "col-12 col-md-6 col-lg-4";
 
       const card = document.createElement("article");
       card.className = "art-card fade-in";
@@ -35,31 +35,52 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const typeLabel = (art.type || "Other").toLowerCase();
       const snippet = makeSnippet(art.describe || "");
+      const imageUrl = art.imageUrl || art.imagePath || "";
 
       card.innerHTML = `
-        <div class="art-card-header">
-          <div class="art-type-pill" data-type="${typeLabel}">
-            ${capitalize(typeLabel)}
+        ${imageUrl ? `
+        <div class="art-card-image">
+          <img
+            src="${imageUrl}"
+            alt="${escapeHtml(art.title || "Artwork image")}"
+            loading="lazy"
+          >
+        </div>
+        ` : ""}
+
+        <div class="art-card-body">
+          <div class="art-card-header">
+            <div class="art-type-pill" data-type="${typeLabel}">
+              ${capitalize(typeLabel)}
+            </div>
+
+            <h3 class="art-title">
+              ${escapeHtml(art.title || "Untitled work")}
+            </h3>
+
+            <p class="art-meta">
+              ${escapeHtml(art.artist || "Unknown artist")}
+              ${art.year ? " · " + escapeHtml(art.year) : ""}
+            </p>
+
+            <p class="art-member">
+              Submitted by:
+              <strong>${escapeHtml(art.memberName || "Unknown member")}</strong>
+            </p>
           </div>
 
-          <h3 class="art-title">${escapeHtml(art.title || "Untitled work")}</h3>
-          <p class="art-meta">
-            ${escapeHtml(art.artist || "Unknown artist")}
-            ${art.year ? " · " + escapeHtml(art.year) : ""}
+          <p class="card-snippet">
+            ${escapeHtml(snippet)}
           </p>
-          <p class="art-member">
-            Submitted by: <strong>${escapeHtml(art.memberName || "Unknown member")}</strong>
-          </p>
+
+          <span class="text-link">View details →</span>
         </div>
-
-        <p class="card-snippet">
-          ${escapeHtml(snippet)}
-        </p>
-
-        <a href="artwork.html?id=${encodeURIComponent(id)}" class="text-link">
-          View details →
-        </a>
       `;
+
+      // Whole card clickable → detail page
+      card.addEventListener("click", () => {
+        window.location.href = `artwork.html?id=${encodeURIComponent(id)}`;
+      });
 
       col.appendChild(card);
       fragment.appendChild(col);
@@ -68,6 +89,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     gallery.innerHTML = "";
     gallery.appendChild(fragment);
     statusEl.textContent = "";
+
+    // trigger scroll reveal once cards exist
+    setupCardReveal();
   } catch (err) {
     console.error(err);
     statusEl.textContent = "Error loading artworks. Please try again later.";
@@ -94,4 +118,24 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+// scroll reveal for .fade-in cards
+function setupCardReveal() {
+  const cards = document.querySelectorAll(".fade-in");
+  if (!("IntersectionObserver" in window) || !cards.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  cards.forEach((card) => observer.observe(card));
 }
