@@ -42,11 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             ${capitalize(typeLabel)}
           </div>
 
-          <div class="art-card-header">
-          <div class="art-type-pill" data-type="${typeLabel}">
-            ${capitalize(typeLabel)}
-          </div>
-
           <h3 class="art-title">${escapeHtml(art.title || "Untitled work")}</h3>
           <p class="art-meta">
             ${escapeHtml(art.artist || "Unknown artist")}
