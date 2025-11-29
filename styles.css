@@ -333,7 +333,10 @@ body {
 
 /* -------------------- DETAIL PAGE -------------------- */
 body.detail-page {
-  font-size: 19px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 230, 230, .45) 0, transparent 60%),
+    radial-gradient(circle at 80% 0, rgba(255, 240, 230, .35) 0, transparent 60%),
+    var(--bg-body) !important;
 }
 
 .detail-hero {
