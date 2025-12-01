@@ -139,3 +139,11 @@ function setupCardReveal() {
 
   cards.forEach((card) => observer.observe(card));
 }
+
+  document.querySelector(".intro-toggle").addEventListener("click", () => {
+    const content = document.querySelector(".intro-content");
+    const toggle = document.querySelector(".intro-toggle");
+
+    content.classList.toggle("open");
+    toggle.classList.toggle("active");
+  });

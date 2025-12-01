@@ -145,6 +145,77 @@ body {
   text-decoration: underline;
 }
 
+/* -------- Project intro block -------- */
+.project-intro {
+  max-width: 780px;
+  margin: 2.4rem auto 1.8rem;
+  padding: 0; /* container controlled by children */
+}
+
+/* Toggle header */
+.intro-toggle {
+  width: 100%;
+  background: var(--edo-paper);
+  border: 1px solid rgba(145, 100, 61, 0.18);
+  border-radius: 18px;
+  padding: 1rem 1.3rem;
+  font-size: 1.25rem;
+  font-family: "Shippori Mincho", serif;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+  transition: background 0.25s ease;
+}
+
+.intro-toggle:hover {
+  background: #fff8f1;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+/* Collapsible area */
+.intro-content {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 1.3rem;
+  transition: max-height 0.4s ease, opacity 0.35s ease;
+  background: var(--edo-paper);
+  border: 1px solid rgba(145,100,61,0.12);
+  border-top: none;
+  border-radius: 0 0 18px 18px;
+}
+
+.intro-content.open {
+  max-height: 500px; /* enough for 2 paragraphs */
+  opacity: 1;
+  padding: 1.3rem 1.3rem 1.6rem;
+}
+
+/* Text */
+.project-intro-text {
+  font-size: 1.03rem;
+  line-height: 1.85;
+  color: var(--edo-text-muted);
+}
+
+.intro-toggle.active .chevron {
+  transform: rotate(-180deg);
+}
+
+/* tighten spacing on smaller screens */
+@media (max-width: 768px) {
+  .project-intro {
+    margin: 1.8rem auto 1.4rem;
+    padding: 1.3rem 1.2rem 1.5rem;
+  }
+}
+
 /* -------------------- FILTERS -------------------- */
 .filters {
   margin-top: 2rem;
