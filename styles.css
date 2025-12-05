@@ -167,11 +167,12 @@ body {
   align-items: center;
   cursor: pointer;
   box-shadow: 0 10px 24px rgba(0,0,0,0.06);
-  transition: background 0.25s ease;
+  transition: background 0.25s ease, transform 0.15s ease;
 }
 
 .intro-toggle:hover {
   background: #fff8f1;
+  transform: translateY(-2px);
 }
 
 .chevron {
@@ -192,16 +193,17 @@ body {
 }
 
 .intro-content.open {
-  max-height: 500px; /* enough for 2 paragraphs */
+  max-height: 1000px; /* enough for 2 paragraphs */
   opacity: 1;
   padding: 1.3rem 1.3rem 1.6rem;
 }
 
 /* Text */
 .project-intro-text {
-  font-size: 1.03rem;
-  line-height: 1.85;
+  font-size: 1.1rem;
+  line-height: 1.8;
   color: var(--edo-text-muted);
+  margin-bottom: 1.2rem;
 }
 
 .intro-toggle.active .chevron {
